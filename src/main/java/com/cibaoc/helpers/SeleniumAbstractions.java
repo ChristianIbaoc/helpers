@@ -104,13 +104,13 @@ public class SeleniumAbstractions {
 	 *                         if necessary.
 	 */
 	public SeleniumAbstractions(
-		String driver, Duration implicitWaitTime, Duration explicitWaitTime, Duration pollEvery, 
+		String driver, long implicitWaitTime, long explicitWaitTime, long pollEvery, 
 		String... arguments) {
 
 		this.httpTimeout = Duration.ofSeconds(5);
-		this.implicitWaitTime = implicitWaitTime;
-		this.explicitWaitTime = explicitWaitTime;
-		this.pollEvery = pollEvery;
+		this.implicitWaitTime = Duration.ofSeconds(implicitWaitTime);
+		this.explicitWaitTime = Duration.ofSeconds(explicitWaitTime);
+		this.pollEvery = Duration.ofSeconds(pollEvery);
 		instantiateHTTP(HttpClient.newBuilder().connectTimeout(httpTimeout)
 			.followRedirects(HttpClient.Redirect.NORMAL).build());
 
@@ -169,11 +169,11 @@ public class SeleniumAbstractions {
 	 *                         WebDriverWait object.
 	 * 
 	 */
-	public SeleniumAbstractions(WebDriver driver, Duration explicitWaitTime, Duration pollEvery) {
+	public SeleniumAbstractions(WebDriver driver, long explicitWaitTime, long pollEvery) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(this.driver, explicitWaitTime, pollEvery);
+		this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(explicitWaitTime), Duration.ofMillis(pollEvery));
 		this.actions = new Actions(this.driver);
-		this.explicitWaitTime = explicitWaitTime;
+		this.explicitWaitTime = Duration.ofSeconds(explicitWaitTime);
 		this.httpTimeout = Duration.ofSeconds(5);
 		instantiateHTTP(HttpClient.newBuilder().connectTimeout(httpTimeout)
 			.followRedirects(HttpClient.Redirect.NORMAL).build());

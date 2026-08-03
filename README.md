@@ -18,4 +18,19 @@ To access the package in a maven way, follow these steps:
      </server>
    </servers>
 
-5.) You should be good
+6.) For your maven project, add this in the pom.xml:
+
+        <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/ChristianIbaoc/helpers</url>
+        </repository>
+        </repositories>
+
+        <dependencies>
+        <dependency>
+            <groupId>com.yourname.helpers</groupId>
+            <artifactId>selenium-abstractions</artifactId>
+            <version>1.0.0 (change this to latest)</version>
+        </dependency>
+        </dependencies>
