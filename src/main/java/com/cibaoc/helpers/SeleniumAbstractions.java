@@ -574,11 +574,11 @@ public class SeleniumAbstractions {
 	}
 
 	public String getAttribute(By locator, String attribute) {
-		return driver.findElement(locator).getAttribute(attribute);
+		return driver.findElement(locator).getDomAttribute(attribute);
 	}
 
 	public String getAttribute(WebElement element, String attribute) {
-		return element.getAttribute(attribute);
+		return element.getDomAttribute(attribute);
 	}
 
 	public Boolean elementVisible(By locator) {
@@ -747,7 +747,7 @@ public class SeleniumAbstractions {
 	}
 
 	public String getAttributeFromParent(By locator, WebElement parent, String attribute) {
-		return parent.findElement(locator).getAttribute(attribute);
+		return parent.findElement(locator).getDomAttribute(attribute);
 	}
 
 	public WebElement focusFromParent(By locator, WebElement parent) {
@@ -881,7 +881,7 @@ public class SeleniumAbstractions {
 
 	public int getResponseCodeBy(By locator) {
 		HttpRequest request = HttpRequest.newBuilder()
-			.uri(URI.create(driver.findElement(locator).getAttribute("href")))
+			.uri(URI.create(driver.findElement(locator).getDomAttribute("href")))
 			.method("HEAD", HttpRequest.BodyPublishers.noBody()).timeout(implicitWaitTime).build();
 		try {
 			return this.httpClient.send(request, HttpResponse.BodyHandlers.discarding()).statusCode();
@@ -892,7 +892,7 @@ public class SeleniumAbstractions {
 	}
 
 	public int getResponseCodeBy(WebElement element) {
-		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(element.getAttribute("href")))
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(element.getDomAttribute("href")))
 			.method("HEAD", HttpRequest.BodyPublishers.noBody()).timeout(implicitWaitTime).build();
 		try {
 			return this.httpClient.send(request, HttpResponse.BodyHandlers.discarding()).statusCode();
