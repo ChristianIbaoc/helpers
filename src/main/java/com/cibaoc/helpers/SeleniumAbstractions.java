@@ -122,7 +122,7 @@ public class SeleniumAbstractions {
 			// Tailwind-driven layout/text-transform (uppercase eyebrow, step-circle line breaks) —
 			// harmless on a warm local Chrome profile, but flaky under CI's colder cold-start.
 			this.eo.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-			this.eo.addArguments("disable-infobars", "--start-maximized", "--window-size=1920,1080", "--lang=en-US");
+			this.eo.addArguments("--disable-infobars", "--start-maximized", "--window-size=1920,1080", "--lang=en-US");
 			this.eo.addArguments(arguments);
 			this.eo.setExperimentalOption("excludeSwitches",
 				Collections.singletonList("enable-automation"));
