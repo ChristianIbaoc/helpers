@@ -110,7 +110,7 @@ public class SeleniumAbstractions {
 		this.httpTimeout = Duration.ofSeconds(5);
 		this.implicitWaitTime = Duration.ofSeconds(implicitWaitTime);
 		this.explicitWaitTime = Duration.ofSeconds(explicitWaitTime);
-		this.pollEvery = Duration.ofSeconds(pollEvery);
+		this.pollEvery = Duration.ofMillis(pollEvery);
 		instantiateHTTP(HttpClient.newBuilder().connectTimeout(httpTimeout)
 			.followRedirects(HttpClient.Redirect.NORMAL).build());
 
