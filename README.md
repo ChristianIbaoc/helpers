@@ -60,3 +60,16 @@ To access the package in a maven way, follow these steps:
     - Publish the release
 
 5.) Update the `<version>` in the usage snippet above (and any other places it's referenced) to X.Y.Z.
+
+Note: a tag is a fixed pointer to the commit it was created at. If you push a tag and then make more commits without re-tagging, creating a release from that tag will only include the commit it points to — not your later changes. If you need the newer commits in the release, tag the new commit instead (don't move/force-push an already-public tag).
+
+## Deleting tags
+
+If you pushed a tag by mistake, or before finishing your changes, you can delete it:
+
+    git tag -d vX.Y.Z                     # delete locally
+    git push origin --delete vX.Y.Z       # delete on GitHub
+
+This is safe to do as long as no GitHub Release was created from that tag yet. If a release was already created from it, deleting the tag does not delete the release — delete the release first (GitHub UI, or `gh release delete`), otherwise it's left pointing at a missing tag.
+
+Also note anyone who already fetched the tag still has it locally; deleting it on the remote doesn't remove it from their clone. They'd need to run `git tag -d vX.Y.Z` and `git fetch --prune --prune-tags` to sync.
